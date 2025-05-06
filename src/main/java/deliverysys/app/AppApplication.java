@@ -15,6 +15,7 @@ public class AppApplication {
     private Environment environment;
 
     public static void main(String[] args) {
+        System.out.println("🚀 APP IS STARTING");
         SpringApplication.run(AppApplication.class, args);
     }
 
