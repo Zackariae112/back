@@ -1,0 +1,100 @@
+import React from 'react';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom';
+
+import Layout from './components/Layout';
+import NotFoundPage from './pages/NotFoundPage';
+import Dashboard from './pages/Dashboard';
+import Orders from './pages/Orders';
+import Assignments from './pages/Assignments';
+import DeliveryPersons from './pages/DeliveryPersons';
+import Login from './pages/Login';
+
+
+import ProtectedRoute from './routes/ProtectedRoute';
+import PublicRoute from './routes/PublicRoute';
+
+const isAuthenticated = () => !!localStorage.getItem('token');
+
+
+const App = () => (
+  <Router>
+    <Routes>
+    <Route 
+      path="/login" 
+      element={
+      <PublicRoute>
+        <Login />
+        </PublicRoute> 
+        }
+      />
+      <Route element={<Layout />}>
+      <Route 
+  index 
+  element={
+    isAuthenticated() 
+      ? <Navigate to="/dashboard" replace /> 
+      : <Navigate to="/login" replace />
+  } 
+/>
+
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/orders"
+          element={
+            <ProtectedRoute>
+              <Orders />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/assignments"
+          element={
+            <ProtectedRoute>
+              <Assignments />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/delivery-persons"
+          element={
+            <ProtectedRoute>
+              <DeliveryPersons />
+            </ProtectedRoute>
+          }
+        />
+      </Route>
+      {/* 404 */}
+      <Route path="*" element={<NotFoundPage />} />
+    </Routes>
+  </Router>
+);
+
+export default App;
+
+--
+authfetch
+// src/utils/authFetch.js
+const authFetch = (url, options = {}) => {
+    const token = localStorage.getItem('token');
+    return fetch(url, {
+      ...options,
+      headers: {
+        ...(options.headers || {}),
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+  };
+  
+  export default authFetch;  
