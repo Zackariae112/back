@@ -56,7 +56,6 @@ public class SecurityConfig {
         } else {
             // In dev mode: permit everything for rapid testing
             http.authorizeHttpRequests(auth -> auth
-            .requestMatchers("/", "/index.html", "/static/**", "/assets/**", "/favicon.ico", "/health").permitAll()
             .anyRequest().permitAll()
         );
                 }
