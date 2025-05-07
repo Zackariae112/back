@@ -32,3 +32,10 @@
 
 !frontend/dist/
 !frontend/dist/**/*
+# Build output
+
+
+
+# Ignore build output
+target/
+dist/
