@@ -1,0 +1,15 @@
+#!/bin/bash
+
+echo "✅ Verifying Spring Boot config..."
+grep -q "server.port=\${PORT:8080}" src/main/resources/application.properties || echo "❌ Missing server.port config"
+grep -q "server.address=0.0.0.0" src/main/resources/application.properties || echo "❌ Missing server.address config"
+
+echo "✅ Checking HealthController..."
+grep -rq "@GetMapping(\"/health\")" src/main/java || echo "❌ Missing health endpoint"
+
+echo "✅ Checking .gitignore for target/ and *.jar..."
+grep -q "target/" .gitignore || echo "❌ target/ not ignored"
+grep -q "*.jar" .gitignore || echo "❌ *.jar not ignored"
+
+echo "✅ Done. Ready to push and deploy? 🎯"
+
