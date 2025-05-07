@@ -9,8 +9,8 @@ public class HealthController {
 
     @GetMapping("/health")
 
-public String health() {
-    
+public String ping() {
+
     System.out.println("🩺 Health endpoint called");
     return "OK";
 }
