@@ -16,5 +16,7 @@
     COPY --from=backend /app/target/*.jar app.jar
     COPY --from=backend /app/src/main/resources/static /static
     EXPOSE 8080
-    HEALTHCHECK --interval=30s --timeout=5s --start-period=60s --retries=10 CMD curl -f http://localhost:8080/health || exit 1
+    HEALTHCHECK --interval=30s --timeout=5s --start-period=90s --retries=5 \
+  CMD curl -f http://localhost:8080/health || exit 1
+
     ENTRYPOINT ["java", "-jar", "app.jar"]
