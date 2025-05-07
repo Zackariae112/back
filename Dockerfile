@@ -18,6 +18,7 @@ COPY --from=backend /app/target/*.jar app.jar
 
 # Let Spring Boot bind to 0.0.0.0:PORT
 ENV PORT=8080
+
 EXPOSE 8080
 
 # Reliable healthcheck
