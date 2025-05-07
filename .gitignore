@@ -38,4 +38,3 @@
 
 # Ignore build output
 target/
-dist/
