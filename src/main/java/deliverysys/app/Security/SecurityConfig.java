@@ -55,7 +55,10 @@ public class SecurityConfig {
             );
         } else {
             // In dev mode: permit everything for rapid testing
-            http.authorizeHttpRequests(auth -> auth.anyRequest().permitAll());
+            
+            http.authorizeHttpRequests(auth -> auth
+            .requestMatchers("/assets/**").permitAll()
+            .anyRequest().permitAll());
         }
 
         return http.build();
