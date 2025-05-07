@@ -5,11 +5,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 @RestController
-public class HealthController {
+public class RootController {
 
-    @GetMapping("/health")
-    public String health() {
-        System.out.println("🩺 Health endpoint called");
-        return "OK";
+    @GetMapping("/")
+    public String root() {
+        System.out.println("✅ Root '/' endpoint hit");
+        return "App is running!";
     }
 }
+
+
