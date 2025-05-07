@@ -24,6 +24,10 @@ EXPOSE 8080
 # Reliable healthcheck
 HEALTHCHECK --interval=30s --timeout=10s --start-period=90s --retries=5 \
 
-  CMD curl --fail https://vivacious-determination-new.up.railway.app/health || exit 1
+  CMD curl --fail http://localhost:8080/health || exit 1
 
-ENTRYPOINT ["java", "-jar", "app.jar"]
+  COPY verify-deploy.sh /verify-deploy.sh
+  RUN chmod +x /verify-deploy.sh
+  ENTRYPOINT ["/verify-deploy.sh"]
+  
+
