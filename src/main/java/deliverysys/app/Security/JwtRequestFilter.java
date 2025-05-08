@@ -25,6 +25,13 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     private JwtUtil jwtUtil;
 
     @Override
+protected boolean shouldNotFilter(@NonNull HttpServletRequest request) {  // 👈 Add @NonNull
+    return request.getRequestURI().startsWith("/api/auth/") || 
+           request.getRequestURI().startsWith("/assets/");
+}
+
+    @Override
+    
     protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain chain)
             throws ServletException, IOException {
 
